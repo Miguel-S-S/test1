@@ -1,0 +1,29 @@
+{% extends 'blogInfo/base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 50px auto; text-align: center;">
+    <h2 class="main-title" style="font-size: 2rem; border-bottom: none;">Editar Comentario</h2>
+    
+    <div style="background-color: var(--paper-bg); border: 2px solid var(--ink-secondary); padding: 30px;">
+        <form method="post">
+            {% csrf_token %}
+            
+            <p style="margin-bottom: 20px; text-align: left; font-style: italic;">
+                Corrigiendo opinión en: <strong>{{ comentario.post.titulo }}</strong>
+            </p>
+
+            {{ form.as_p }}
+
+            <div style="margin-top: 20px; display: flex; justify-content: space-between;">
+                <a href="{% url 'post_detail' comentario.post.pk %}" style="text-decoration: none; color: var(--ink-muted); padding: 10px;">
+                    Cancelar
+                </a>
+                
+                <button type="submit" class="btn-read" style="cursor: pointer; border: none; font-size: 0.9rem;">
+                    Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

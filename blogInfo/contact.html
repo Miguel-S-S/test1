@@ -1,0 +1,57 @@
+{% extends 'blogInfo/base.html' %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; text-align: center;">
+    
+    <h1 class="main-title" style="border-bottom: none; margin-bottom: 10px;">Contáctanos</h1>
+    <p style="font-style: italic; margin-bottom: 40px;">
+        ¿Tienes alguna sugerencia cervecera o quieres colaborar con nosotros? Escríbenos.
+    </p>
+
+    {% if exito %}
+        <div style="padding: 20px; border: 2px solid var(--ink-primary); background-color: rgba(0,0,0,0.05); margin-bottom: 30px;">
+            <h3 style="margin: 0; font-family: var(--font-heading);">¡Mensaje Enviado!</h3>
+            <p>Gracias por ponerte en contacto. Te responderemos despues de unas birras  🍺🍺🍺.</p>
+            <a href="{% url 'home' %}" class="btn-read" style="font-size: 0.8rem; margin-top: 15px;">Volver al Inicio</a>
+        </div>
+    
+    {% else %}
+        <div style="text-align: left; padding: 30px; border: 2px dashed var(--ink-muted);">
+            <form method="post">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-family: var(--font-heading); font-weight: bold; display: block; margin-bottom: 5px;">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" class="btn-read" style="cursor: pointer; border: none; padding: 15px 40px;">
+                        Enviar Mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+
+    <div style="margin-top: 60px; border-top: 1px solid var(--accent-lines); padding-top: 30px;">
+    <h4 style="font-family: var(--font-heading);">Síguenos en redes</h4>
+        <p style="font-size: 1.2rem; letter-spacing: 5px;">
+            <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+                <i class="fab fa-instagram"></i> INSTAGRAM
+            </a> | 
+            <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+                <i class="fab fa-twitter"></i> TWITTER
+            </a> | 
+            <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+                <i class="fab fa-facebook"></i> FACEBOOK
+            </a>
+        </p>
+    </div>
+
+</div>
+{% endblock %}

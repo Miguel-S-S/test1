@@ -1,0 +1,67 @@
+{% extends 'blogInfo/base.html' %}
+
+{% block content %}
+    
+    {% if categoria_seleccionada %}
+        <div style="text-align: center; margin-bottom: 40px; border-bottom: 2px solid var(--ink-primary);">
+            <h2 style="font-family: var(--font-heading); color: var(--ink-muted); text-transform: uppercase; font-size: 1rem;">Sección</h2>
+            <h1 class="main-title" style="margin-top: 0; font-size: 2.5rem;">{{ categoria_seleccionada.nombre }}</h1>
+            <a href="{% url 'home' %}" style="color: var(--ink-secondary); text-decoration: none;">&larr; Volver a todas las noticias</a>
+            <br><br>
+        </div>
+    {% endif %}
+    <div style="margin-bottom: 30px; padding: 15px; border-top: 1px solid var(--accent-lines); border-bottom: 1px solid var(--accent-lines); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        
+        <span style="font-family: var(--font-heading); font-weight: bold; font-size: 0.9rem; text-transform: uppercase;">
+            Ordenar noticias por:
+        </span>
+
+        <div class="filters">
+            <form method="get" style="display: inline;">
+                <select name="orden" onchange="this.form.submit()" style="padding: 5px; border: 1px solid var(--ink-secondary); background: transparent; font-family: var(--font-body); cursor: pointer;">
+                    <option value="antiguedad_desc" {% if request.GET.orden == 'antiguedad_desc' %}selected{% endif %}>Más Recientes</option>
+                    <option value="antiguedad_asc" {% if request.GET.orden == 'antiguedad_asc' %}selected{% endif %}>Más Antiguas</option>
+                    <option value="alfabetico_asc" {% if request.GET.orden == 'alfabetico_asc' %}selected{% endif %}>Título (A-Z)</option>
+                    <option value="alfabetico_desc" {% if request.GET.orden == 'alfabetico_desc' %}selected{% endif %}>Título (Z-A)</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    {% for post in posts %}
+    <div class="post-card">
+        
+        {% if post.imagen %}
+            <img src="{{ post.imagen.url }}" class="post-image" alt="{{ post.titulo }}">
+        {% endif %}
+
+        <div class="post-content">
+            <h2 class="post-title">{{ post.titulo }}</h2>
+            
+            {% if post.subtitulo %}
+                <h3 style="font-family: var(--font-body); font-size: 1.2rem; margin-top: -10px; margin-bottom: 15px; font-style: italic;">
+                    {{ post.subtitulo }}
+                </h3>
+            {% endif %}
+
+            <span class="post-meta">
+                {{ post.fecha_publicacion|date:"d F Y" }} 🍻 Creado por {{ post.autor_post.nombre }} 🍻 
+                Categorías: 
+                {% for cat in post.categorias.all %}
+                    <a href="{% url 'categoria_posts' cat.id %}" style="color: var(--ink-primary); font-weight: bold; text-decoration: none;">
+                        {{ cat.nombre }}
+                    </a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </span>
+
+            <p class="post-excerpt">
+                {{ post.contenido|truncatewords:50 }}
+            </p>
+
+            <a href="{% url 'post_detail' post.pk %}" class="btn-read">Leer el post completo</a>
+        </div>
+    </div>
+    {% empty %}
+        <p style="text-align: center; font-size: 1.5rem;">No hay posts en esta sección.</p>
+    {% endfor %}
+
+{% endblock %}

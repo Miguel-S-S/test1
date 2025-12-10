@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+  <header style="max-width: 1000px; margin: 0 auto; padding-top: 40px;">
+        
+        <h1 class="main-title" style="margin-bottom: 20px; border-bottom: none;">CERVEZA BLOG</h1>
+        
+        <nav style="
+            border-top: 2px solid var(--ink-primary); 
+            border-bottom: 2px solid var(--ink-primary); 
+            padding: 15px 0; 
+            margin-bottom: 50px;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;">
+            
+            <div class="nav-main">
+                <a href="{% url 'home' %}" class="nav-link">Inicio</a>
+                <a href="{% url 'about' %}" class="nav-link">acerca</a>
+                <a href="{% url 'contact' %}" class="nav-link">Contacto</a>
+            </div>
+
+            <div class="nav-user" style="font-size: 0.9rem;">
+                {% if user.is_authenticated %}
+                    <span style="font-family: var(--font-body); font-style: italic; margin-right: 15px; color: var(--ink-secondary);">
+                        Conectado como : {{ user.username }}
+                    </span>
+                    
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" style="
+                            background: transparent; 
+                            border: 1px solid var(--ink-muted); 
+                            cursor: pointer; 
+                            font-family: var(--font-heading); 
+                            font-weight: bold; 
+                            text-transform: uppercase; 
+                            color: var(--ink-primary); 
+                            padding: 5px 10px;
+                            font-size: 0.8rem;
+                            border-radius: 4px;">
+                            Salir
+                        </button>
+                    </form>
+
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-link" style="font-size: 0.8rem; border: 1px solid var(--ink-primary); padding: 5px 10px; border-radius: 4px;">Ingresar</a>
+                    <a href="{% url 'registro' %}" class="nav-link" style="font-size: 0.8rem; margin-left: 0;">Registrarse</a>
+                {% endif %}
+            </div>
+
+        </nav>
+    </header>
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer style="text-align: center; padding: 50px 0; color: var(--ink-muted); font-size: 0.9rem; border-top: 1px solid var(--accent-lines); margin-top: 50px;">
+        <p>    <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+        <i class="fab fa-instagram"></i> INSTAGRAM
+    </a> 🍻 
+    <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+        <i class="fab fa-twitter"></i> TWITTER
+    </a> 🍻  
+    <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+        <i class="fab fa-facebook"></i> FACEBOOK
+    </a> &trade; 2025 Beer Blog&REG; - Hecho con una 🍺 helada </a>
+    </p>
+        
+    </footer>
+
+</body>
+</html>

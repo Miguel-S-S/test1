@@ -1,0 +1,24 @@
+# Entornos virtuales
+venv/
+env/
+.virtualenv/
+.venv/
+virtual_enviroment/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Config y variables
+*.env
+
+# Herramientas
+.vscode/
+.idea/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+entorno/
