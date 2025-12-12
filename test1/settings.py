@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-5-8a@*fyow-)7j!#4@&fu0zgzdu=cxl3#h7msgu_pgtnouxxoa
 DEBUG = False
 
 ALLOWED_HOSTS = ['miguels.pythonanywhere.com']
-
+#ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -136,3 +136,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
