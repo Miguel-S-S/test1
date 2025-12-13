@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>Beer Blog</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
@@ -25,14 +25,14 @@
             
             <div class="nav-main">
                 <a href="{% url 'home' %}" class="nav-link">Inicio</a>
-                <a href="{% url 'about' %}" class="nav-link">acerca</a>
+                <a href="{% url 'about' %}" class="nav-link">Acerca</a>
                 <a href="{% url 'contact' %}" class="nav-link">Contacto</a>
             </div>
 
             <div class="nav-user" style="font-size: 0.9rem;">
                 {% if user.is_authenticated %}
                     <span style="font-family: var(--font-body); font-style: italic; margin-right: 15px; color: var(--ink-secondary);">
-                        Conectado como : {{ user.username }}
+                        Conectado como: {{ user.username }}
                     </span>
                     
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
@@ -60,23 +60,31 @@
 
         </nav>
     </header>
+
     <div class="container">
         {% block content %}
         {% endblock %}
     </div>
 
     <footer style="text-align: center; padding: 50px 0; color: var(--ink-muted); font-size: 0.9rem; border-top: 1px solid var(--accent-lines); margin-top: 50px;">
-        <p>    <a href="#" style="text-decoration: none; color: var(--ink-primary);">
-        <i class="fab fa-instagram"></i> INSTAGRAM
-    </a> 🍻 
-    <a href="#" style="text-decoration: none; color: var(--ink-primary);">
-        <i class="fab fa-twitter"></i> TWITTER
-    </a> 🍻  
-    <a href="#" style="text-decoration: none; color: var(--ink-primary);">
-        <i class="fab fa-facebook"></i> FACEBOOK
-    </a> &trade; 2025 Beer Blog&REG; - Hecho con una 🍺 helada </a>
-    </p>
-        
+     <h2 style="font-family: var(--font-heading); text-transform: uppercase; margin-top: 0;">Conectemos</h2>
+        <p style="margin-bottom: 15px;">    
+            <a href="https://instagram.com" target="_blank" style="text-decoration: none; color: var(--ink-primary); margin: 0 5px;">
+                <i class="fab fa-instagram"></i> INSTAGRAM
+            </a> 🍻 
+            <a href="https://twitter.com" target="_blank" style="text-decoration: none; color: var(--ink-primary); margin: 0 5px;">
+                <i class="fab fa-twitter"></i> TWITTER
+            </a> 🍻  
+            <a href="https://facebook.com" target="_blank" style="text-decoration: none; color: var(--ink-primary); margin: 0 5px;">
+                <i class="fab fa-facebook"></i> FACEBOOK
+            </a> 🍻
+            <a href="mailto:hola@cervezablog.com" style="text-decoration: none; color: var(--ink-primary); margin: 0 5px;">
+                <i class="fas fa-envelope"></i> EMAIL
+            </a>
+        </p>
+        <p>
+            &trade; 2025 Beer Blog&REG; - Hecho con una 🍺 helada
+        </p>
     </footer>
 
 </body>

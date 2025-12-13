@@ -1,6 +1,58 @@
 {% extends 'blogInfo/base.html' %}
 
 {% block content %}
-    <h2 class="post-title" style="text-align: center;">Contacto</h2>
-    <p style="text-align: center;">Próximamente formulario de contacto aquí.</p>
+<div style="max-width: 700px; margin: 0 auto; text-align: center;">
+    
+    <h1 class="main-title" style="border-bottom: none; margin-bottom: 10px;">Contáctanos</h1>
+        <p style="margin-bottom: 30px;">¿Tienes una cervecería? ¿Quieres recomendarnos un estilo? Escríbenos.</p>
+
+
+    {% if exito %}
+        <div style="padding: 30px; background-color: rgba(0,0,0,0.05); border: 1px solid var(--ink-primary);">
+            <i class="fas fa-check-circle" style="font-size: 3rem; color: green; margin-bottom: 20px;"></i>
+            <h3 style="margin: 0; font-family: var(--font-heading);">¡Mensaje Enviado!</h3>
+            <p>Gracias por escribirnos. Te responderemos pinta en mano 🍺.</p>
+            <a href="{% url 'home' %}" style="display: inline-block; margin-top: 15px; text-decoration: none; font-weight: bold; color: var(--ink-primary); border-bottom: 2px solid var(--ink-primary);">
+                &larr; Volver al Inicio
+            </a>
+        </div>
+    
+    {% else %}
+        <div style="text-align: left; padding: 30px; border: 2px solid var(--ink-secondary); position: relative;">
+            <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: var(--ink-primary); border-radius: 50%;"></div>
+
+            <h3 style="text-align: center; margin-top: 0; font-family: var(--font-heading);">Envíanos un mensaje</h3>
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                {% for field in form %}
+                    <div style="margin-bottom: 20px;">
+                        <label style="font-family: var(--font-heading); font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem;">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button type="submit" style="
+                        background-color: var(--ink-primary); 
+                        color: #fff; 
+                        font-family: var(--font-heading); 
+                        font-weight: bold; 
+                        text-transform: uppercase; 
+                        padding: 15px 40px; 
+                        border: none; 
+                        cursor: pointer; 
+                        font-size: 1rem;
+                        transition: 0.3s;">
+                        Enviar Mensaje
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+
+</div>
 {% endblock %}
