@@ -19,6 +19,8 @@ urlpatterns = [
     path('comentario/editar/<int:pk>/', views.editar_comentario, name='editar_comentario'),
     #comentar un comentario
     path('comentario/responder/<int:pk>/', views.responder_comentario, name='responder_comentario'),
-    
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('notificacion/leer/<int:pk>/', views.leer_notificacion, name='leer_notificacion'),
+    path('like/<int:pk>/', views.dar_like, name='dar_like'),
 ]   
 

@@ -1,0 +1,61 @@
+{% extends 'blogInfo/base.html' %}
+
+{% block content %}
+<div style="max-width: 1000px; margin: 0 auto;">
+    
+    <h1 class="main-title">Panel de Control del Dueño</h1>
+    
+    <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 40px;">
+        
+        <div style="background: #e1d8c1; padding: 20px; border: 2px solid var(--ink-primary); width: 200px; text-align: center;">
+            <h3 style="margin: 0; font-size: 3rem;">{{ total_usuarios }}</h3>
+            <span style="text-transform: uppercase; font-weight: bold;">Seguidores</span>
+        </div>
+
+        <div style="background: #e1d8c1; padding: 20px; border: 2px solid var(--ink-primary); width: 200px; text-align: center;">
+            <h3 style="margin: 0; font-size: 3rem;">{{ mensajes_no_leidos }}</h3>
+            <span style="text-transform: uppercase; font-weight: bold;">Mensajes Nuevos</span>
+        </div>
+
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px;">
+        
+        <div>
+            <h3 style="border-bottom: 2px solid var(--ink-muted); padding-bottom: 10px;">🔔 Últimas Alertas</h3>
+            
+            {% for notif in notificaciones %}
+                <div style="background: rgba(0,0,0,0.05); padding: 15px; margin-bottom: 10px; border-left: 4px solid var(--ink-primary);">
+                    <p style="margin: 0; font-weight: bold;">{{ notif.mensaje }}</p>
+                    <small>{{ notif.fecha|date:"d M H:i" }}</small>
+                    <br>
+                    {% if notif.url_destino %}
+                        <a href="{% url 'leer_notificacion' notif.pk %}" style="color: blue; font-size: 0.8rem;">Ver ahora &rarr;</a>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No hay alertas nuevas.</p>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h3 style="border-bottom: 2px solid var(--ink-muted); padding-bottom: 10px;">✉️ Buzón de Mensajes</h3>
+            
+            {% for msj in mensajes %}
+                <div style="border: 1px solid var(--ink-muted); padding: 15px; margin-bottom: 10px;">
+                    <div style="font-weight: bold; display: flex; justify-content: space-between;">
+                        {{ msj.nombre }}
+                        <small>{{ msj.fecha_envio|date:"d/m" }}</small>
+                    </div>
+                    <div style="color: var(--ink-muted); font-size: 0.9rem;">{{ msj.email }}</div>
+                    <p style="font-style: italic; margin-top: 5px;">"{{ msj.mensaje|truncatewords:10 }}"</p>
+                </div>
+            {% empty %}
+                <p>La bandeja está vacía.</p>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

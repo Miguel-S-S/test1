@@ -34,7 +34,11 @@
                     <span style="font-family: var(--font-body); font-style: italic; margin-right: 15px; color: var(--ink-secondary);">
                         Conectado como: {{ user.username }}
                     </span>
-                    
+                {% if user.is_staff %}
+                    <a href="{% url 'dashboard' %}" style="background-color: var(--ink-primary); color: white; padding: 5px 10px; border-radius: 4px; text-decoration: none; margin-right: 15px; font-weight: bold;">
+                        ⚙️ PANEL DUEÑO
+                    </a>
+                {% endif %}                    
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
                         {% csrf_token %}
                         <button type="submit" style="
@@ -78,7 +82,7 @@
             <a href="https://facebook.com" target="_blank" style="text-decoration: none; color: var(--ink-primary); margin: 0 5px;">
                 <i class="fab fa-facebook"></i> FACEBOOK
             </a> 🍻
-            <a href="mailto:hola@cervezablog.com" style="text-decoration: none; color: var(--ink-primary); margin: 0 5px;">
+            <a href="mailto:saucedo.miguel7@gmail.com" style="text-decoration: none; color: var(--ink-primary); margin: 0 5px;">
                 <i class="fas fa-envelope"></i> EMAIL
             </a>
         </p>

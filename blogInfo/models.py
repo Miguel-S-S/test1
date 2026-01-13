@@ -21,7 +21,7 @@ class Categoria(models.Model):
     nombre = models.CharField(max_length=100)
 
     class Meta:
-        verbose_name_plural = "Categorías" #una pavada para que salga "Categorías" en el admin
+        verbose_name_plural = "Categorías" #aparece en español "Categorías" en el admin
 
     def __str__(self):
         return self.nombre
@@ -42,6 +42,13 @@ class Post(models.Model):
     fecha_actualizacion = models.DateTimeField(auto_now=True)
     fecha_publicacion = models.DateTimeField(blank=True, null=True)
     categorias = models.ManyToManyField("Categoria", related_name="posts", blank=True)
+    #contador de visitas
+    vistas = models.PositiveIntegerField(default=0)
+    #sistema de likes (relacion mucho a muchos)
+    likes = models.ManyToManyField(User, related_name='blog_posts_likes', blank=True)
+
+    def total_likes(self):
+        return self.likes.count()
 
     class Meta:
         ordering = ['-fecha_publicacion']
@@ -52,6 +59,38 @@ class Post(models.Model):
     def publicar_articulo(self):
         self.fecha_publicacion = timezone.now()
         self.save()
+
+# MODELO: MENSAJES DE CONTACTO (Req. 5)
+class MensajeContacto(models.Model):
+    nombre = models.CharField(max_length=100)
+    email = models.EmailField()
+    mensaje = models.TextField()
+    fecha_envio = models.DateTimeField(auto_now_add=True)
+    leido = models.BooleanField(default=False) # 
+
+    def __str__(self):
+        return f"Mensaje de {self.nombre} - {self.email}"
+
+
+# MODELO: NOTIFICACIONES (Req. 1, 3 y 4)
+class Notificacion(models.Model):
+    TIPO_CHOICES = (
+        ('NU', 'Nuevo Usuario'),
+        ('NC', 'Nuevo Comentario'),
+    )
+    
+    # Destinatario suele ser el admin, pero lo dejamos abierto por si escala
+    destinatario = models.ForeignKey(User, on_delete=models.CASCADE, related_name='notificaciones')
+    tipo = models.CharField(max_length=2, choices=TIPO_CHOICES)
+    mensaje = models.CharField(max_length=255)
+    leido = models.BooleanField(default=False)
+    fecha = models.DateTimeField(auto_now_add=True)
+    
+    # Req. 4: Guardamos la URL para redirigir al admin directo al evento
+    url_destino = models.CharField(max_length=200, blank=True, null=True) 
+
+    def __str__(self):
+        return f"Alerta: {self.mensaje}"
 
 
 class Comentario(models.Model):

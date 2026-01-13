@@ -25,10 +25,45 @@
         {% if post.imagen %}
             <img src="{{ post.imagen.url }}" class="post-image" style="height: auto; max-height: 600px;" alt="{{ post.titulo }}">
         {% endif %}
+        <div style="margin: 40px 0; padding: 15px; border-top: 1px solid var(--accent-lines); border-bottom: 1px solid var(--accent-lines); display: flex; justify-content: space-between; align-items: center;">
+            
+            <div style="display: flex; gap: 20px; align-items: center;">
+                
+                <span style="color: var(--ink-muted); font-weight: bold;">
+                    <i class="fas fa-eye"></i> {{ post.vistas }} Vistas
+                </span>
 
+                <form action="{% url 'dar_like' post.pk %}" method="POST" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" style="background: none; border: none; cursor: pointer; font-size: 1.2rem;">
+                        {% if esta_likeado %}
+                            <i class="fas fa-heart" style="color: #e0245e;"></i> 
+                        {% else %}
+                            <i class="far fa-heart" style="color: var(--ink-primary);"></i>
+                        {% endif %}
+                        <span style="font-family: var(--font-body); font-weight: bold; color: var(--ink-primary);">
+                            {{ post.total_likes }} Likes
+                        </span>
+                    </button>
+                </form>
+            </div>
+
+            <div style="font-size: 0.9rem;">
+                <span style="margin-right: 10px; font-weight: bold;">Compartir:</span>
+                
+                <a href="https://api.whatsapp.com/send?text=¡Mira esta nota sobre cerveza! {{ request.build_absolute_uri }}" target="_blank" style="color: #25D366; text-decoration: none; margin-right: 10px; font-size: 1.2rem;">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+                <a href="https://twitter.com/intent/tweet?text=Leyendo {{ post.titulo }}&url={{ request.build_absolute_uri }}" target="_blank" style="color: #1DA1F2; text-decoration: none; font-size: 1.2rem;">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
         <div class="post-content" style="font-size: 1.2rem; text-align: justify;">
             {{ post.contenido|linebreaks }}
         </div>
+
 
         <div style="margin-top: 50px; text-align: center;">
             <a href="{% url 'home' %}" class="btn-read" style="font-size: 0.9rem;">&larr; Volver al pagina principal</a>

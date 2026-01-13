@@ -1,10 +1,16 @@
 from django.contrib import admin
-from .models import Autor, Categoria, Post, Comentario
+from .models import Autor, Categoria, Post, Comentario, MensajeContacto
 
 @admin.register(Categoria)
 class CategoriaAdmin(admin.ModelAdmin):
     list_display = ('nombre',)
     search_fields = ('nombre',)
+
+@admin.register(MensajeContacto)
+class MensajeContactoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'email', 'fecha_envio', 'mensaje')
+    search_fields = ('nombre', 'email', 'mensaje')
+    list_filter = ('fecha_envio','leido')
 
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):
