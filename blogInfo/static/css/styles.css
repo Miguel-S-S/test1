@@ -1,159 +1,212 @@
 /* Fuentes de Google */
-@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Montserrat:wght@700;900&display=swap");
-
+/* 'Dancing Script' para el logo/título y 'Poppins' para el cuerpo */
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap");
 
 :root {
-  --paper-bg: #f4ebd0;       
-  --ink-primary: #1a1a1a;  
-  --ink-secondary: #3e322b; 
-  --ink-muted: #665c55;     
-  --accent-lines: #8c8279;   
-  
-  --font-heading: "Montserrat", sans-serif;
-  --font-body: "Lora", serif;
+  /* Paleta Gastronómica: Colores cálidos (Pan, Carne, Dorado) */
+  --bg-color: #fdfbf7; /* Crema muy suave (Fondo) */
+  --text-primary: #2c1810; /* Marrón café muy oscuro (Texto principal) */
+  --text-secondary: #5d4037; /* Marrón medio (Subtítulos) */
+  --accent-color: #d84315; /* Naranja quemado (Botones/Enlaces - color salsa/dorado) */
+  --border-color: #eecda3; /* Beige tostado (Líneas) */
+
+  --font-logo: "Dancing Script", cursive;
+  --font-body: "Poppins", sans-serif;
 }
 
 /* Estilos Globales */
 body {
-  background-color: var(--paper-bg);
-  color: var(--ink-secondary);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
   font-family: var(--font-body);
   line-height: 1.6;
   margin: 0;
+  background-image: radial-gradient(#eecda3 1px, transparent 1px);
+  background-size: 20px 20px; /* Textura sutil de fondo */
 }
 
-
+/* Título Principal (Estilo Logo Primavera 88) */
 h1.main-title {
-  font-family: var(--font-heading);
-  color: var(--ink-primary);
+  font-family: var(--font-logo);
+  color: var(--text-primary);
   text-align: center;
+  font-size: 5rem;
+  margin: 40px 0 10px 0;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+  padding-bottom: 0;
+  border-bottom: none;
+  line-height: 1;
+}
+
+/* Subtítulo debajo del logo */
+.brand-subtitle {
+  text-align: center;
+  font-family: var(--font-body);
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 60px 0 40px 0; 
-  font-size: 4rem; 
-  font-weight: 900;
-  
-  text-shadow: none; 
-  padding-bottom: 20px;
-  border-bottom: 3px solid var(--ink-primary);
-  max-width: 900px;
-  margin-left: auto;
-  margin-right: auto;
+  letter-spacing: 4px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--text-primary);
+  display: inline-block;
+  padding-bottom: 5px;
+  margin-bottom: 40px;
 }
 
 /* Contenedor Principal */
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 20px;
+  background-color: #ffffff; /* Fondo blanco para el contenido para que resalte */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra suave */
+  border-radius: 15px;
+  margin-bottom: 50px;
 }
 
-
+/* Tarjetas de Posts (Ahora parecen Items de Menú) */
 .post-card {
-  background-color: transparent; 
-  border: none;
-  border-radius: 0; 
-  box-shadow: none; 
-  margin-bottom: 60px;
-  border-bottom: 1px solid var(--accent-lines);
-  padding-bottom: 40px;
+  background-color: #fff;
+  border-bottom: 1px dashed var(--border-color); /* Línea punteada como ticket */
+  padding: 30px;
+  margin-bottom: 0;
+  transition: transform 0.3s ease;
 }
 
-
-.post-card:hover .post-image {
-  opacity: 0.9;
-  filter: sepia(30%); 
+.post-card:hover {
+  background-color: #fffcf5;
+  transform: translateY(-5px);
 }
 
-/* Imagen */
+.post-card:last-child {
+  border-bottom: none;
+}
+
+/* Imagen del Sanguche */
 .post-image {
   width: 100%;
-  height: 280px; 
+  height: 350px;
   object-fit: cover;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  filter: none;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .post-content {
-  padding: 10px 0; 
+  text-align: center;
 }
-
 
 .post-title {
-  font-family: var(--font-heading);
-  font-size: 2.2rem;
-  margin-top: 0;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 2rem;
   margin-bottom: 10px;
-  color: var(--ink-primary);
-  line-height: 1.1;
-  text-transform: uppercase; 
+  color: var(--text-primary);
+  text-transform: capitalize;
 }
 
-
 .post-meta {
-  color: var(--ink-muted);
-  font-family: var(--font-heading); 
-  font-weight: 700;
-  font-size: 0.8rem;
+  color: var(--accent-color);
+  font-weight: 600;
+  font-size: 0.9rem;
   text-transform: uppercase;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   letter-spacing: 1px;
 }
 
 .post-excerpt {
-  font-size: 1.2rem;
-  color: var(--ink-secondary);
+  font-size: 1.1rem;
+  color: var(--text-secondary);
   margin-bottom: 25px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+/* Botón "Ver Más" convertido en Botón de Pedido */
 .btn-read {
-  background-color: transparent;
-  color: var(--ink-primary);
-  font-family: var(--font-heading);
-  font-weight: 900;
+  background-color: var(--text-primary);
+  color: #fff;
+  font-family: var(--font-body);
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  padding: 0;
-  text-decoration: underline;
-  text-decoration-thickness: 3px; 
-  text-underline-offset: 5px;
-  box-shadow: none;
-  border-radius: 0;
-  font-size: 1rem;
+  padding: 10px 25px;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s;
+  display: inline-block;
 }
 
 .btn-read:hover {
-  background-color: var(--ink-primary);
-  color: var(--paper-bg); 
-  padding: 5px 10px; 
-  text-decoration: none;
-  transform: none;
-  box-shadow: none;
+  background-color: var(--accent-color);
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(216, 67, 21, 0.3);
 }
+
+/* Navegación */
+nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
 .nav-link {
-    margin-right: 25px;
-    text-decoration: none; 
-    color: var(--ink-secondary); 
-    font-family: var(--font-heading); 
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 1rem;
-    transition: color 0.3s;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -5px;
+  left: 0;
+  background-color: var(--accent-color);
+  transition: width 0.3s;
 }
 
 .nav-link:hover {
-    color: var(--ink-primary);
-    text-decoration: underline;
+  color: var(--accent-color);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Formulario Login/Registro (Inputs) */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea {
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px;
+  font-family: var(--font-body);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
 }
 
 @media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .nav-user {
-        margin-top: 10px;
-    }
+  h1.main-title {
+    font-size: 3.5rem;
+  }
+  .container {
+    padding: 10px;
+    width: 95%;
+  }
 }
