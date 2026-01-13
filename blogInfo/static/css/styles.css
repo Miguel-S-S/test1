@@ -201,12 +201,105 @@ textarea:focus {
   border-color: var(--accent-color);
 }
 
+/* =========================================
+   OPTIMIZACIÓN PARA CELULARES (RESPONSIVE)
+   ========================================= */
+
 @media (max-width: 768px) {
-  h1.main-title {
-    font-size: 3.5rem;
-  }
-  .container {
-    padding: 10px;
-    width: 95%;
-  }
+    
+    /* 1. Ajuste del Título y Logo */
+    h1.main-title { 
+        font-size: 3.5rem; /* Reducimos el tamaño gigante */
+        margin-top: 20px;
+        line-height: 1.1;
+    }
+
+    .brand-subtitle {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+    }
+
+    /* 2. Contenedor aprovecha más espacio a los lados */
+    .container { 
+        width: 92%; 
+        padding: 15px; 
+        margin-top: 0;
+    }
+
+    /* 3. Navegación: Botones grandes y apilados */
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .nav-main {
+        display: flex;
+        flex-direction: column; /* Uno abajo del otro */
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-link {
+        display: block;
+        text-align: center;
+        padding: 12px; /* Área de toque más grande */
+        background-color: #fff;
+        border: 1px solid var(--border-color);
+        border-radius: 8px; /* Parecen botones de app */
+        width: 100%; /* Ocupa todo el ancho */
+        box-sizing: border-box; /* Evita que el padding rompa el ancho */
+    }
+
+    .nav-link:active {
+        background-color: var(--accent-color);
+        color: white;
+    }
+    
+    /* Quitamos la línea decorativa en móvil porque usamos estilo botón */
+    .nav-link::after {
+        display: none;
+    }
+
+    .nav-user {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        border-top: 1px dashed var(--border-color);
+        padding-top: 15px;
+    }
+
+    /* 4. Tarjetas de Sándwiches */
+    .post-card {
+        padding: 15px; /* Menos relleno interno */
+    }
+
+    .post-title {
+        font-size: 1.6rem; /* Título un poco más chico */
+    }
+
+    .post-image {
+        height: 200px; /* Altura controlada para que no ocupe toda la pantalla */
+    }
+
+    /* 5. Formularios amigables al tacto */
+    input[type="text"], 
+    input[type="password"], 
+    input[type="email"], 
+    textarea {
+        font-size: 16px; /* Vital: 16px evita que el iPhone haga zoom al escribir */
+        padding: 12px;
+    }
+
+    button[type="submit"], .btn-read {
+        width: 100%; /* Botones de acción ocupan todo el ancho */
+        padding: 15px;
+        font-size: 1.1rem;
+    }
+    
+    /* Footer */
+    footer h3 {
+        font-size: 1.2rem;
+    }
 }
