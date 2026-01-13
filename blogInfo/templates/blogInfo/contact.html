@@ -3,32 +3,40 @@
 {% block content %}
 <div style="max-width: 700px; margin: 0 auto; text-align: center;">
     
-    <h1 class="main-title" style="border-bottom: none; margin-bottom: 10px;">Contáctanos</h1>
-        <p style="margin-bottom: 30px;">¿Quieres probar nuestro sandwich ? ¿Quieres recomendarnos un estilo ? Escríbenos.</p>
+    <h1 class="main-title" style="font-size: 3rem; border: none;">Realizar Pedido</h1>
+    <p style="font-family: var(--font-body); margin-bottom: 30px; color: var(--text-secondary);">
+        ¿Querés probar uno de nuestros sándwiches? ¿Tenés una consulta? Escribinos y te preparamos todo.
+    </p>
 
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
+        
+        <div style="border: 2px dashed var(--border-color); padding: 20px; width: 200px; border-radius: 10px; background-color: #fffcf5;">
+            <i class="fas fa-motorcycle" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 10px;"></i>
+            <h4 style="margin: 5px 0; font-family: var(--font-body);">DELIVERY</h4>
+            <span style="font-weight: bold; font-size: 1.2rem;">3794 737067</span>
+        </div>
+
+    </div>
 
     {% if exito %}
-        <div style="padding: 30px; background-color: rgba(0,0,0,0.05); border: 1px solid var(--ink-primary);">
-            <i class="fas fa-check-circle" style="font-size: 3rem; color: green; margin-bottom: 20px;"></i>
-            <h3 style="margin: 0; font-family: var(--font-heading);">¡Mensaje Enviado!</h3>
-            <p>Gracias por escribirnos. Te responderemos a la brevedad.</p>
-            <a href="{% url 'home' %}" style="display: inline-block; margin-top: 15px; text-decoration: none; font-weight: bold; color: var(--ink-primary); border-bottom: 2px solid var(--ink-primary);">
-                &larr; Volver al Inicio
+        <div style="padding: 30px; background-color: #e8f5e9; border: 1px solid #4caf50; border-radius: 10px;">
+            <i class="fas fa-check-circle" style="font-size: 3rem; color: #4caf50; margin-bottom: 20px;"></i>
+            <h3 style="margin: 0; font-family: var(--font-body);">¡Pedido Enviado!</h3>
+            <p>Ya recibimos tu mensaje. En breve te contactamos para confirmar.</p>
+            <a href="{% url 'home' %}" class="btn-read" style="margin-top: 15px;">
+                &larr; Volver al Menú
             </a>
         </div>
     
     {% else %}
-        <div style="text-align: left; padding: 30px; border: 2px solid var(--ink-secondary); position: relative;">
-            <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); width: 20px; height: 20px; background: var(--ink-primary); border-radius: 50%;"></div>
+        <div style="text-align: left; padding: 30px; background-color: #fff; border: 1px solid var(--border-color); border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
 
-            <h3 style="text-align: center; margin-top: 0; font-family: var(--font-heading);">Envíanos un mensaje</h3>
-            
             <form method="post">
                 {% csrf_token %}
                 
                 {% for field in form %}
                     <div style="margin-bottom: 20px;">
-                        <label style="font-family: var(--font-heading); font-weight: bold; display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem;">
+                        <label style="font-family: var(--font-body); font-weight: bold; display: block; margin-bottom: 5px; color: var(--text-primary);">
                             {{ field.label }}
                         </label>
                         {{ field }}
@@ -36,18 +44,8 @@
                 {% endfor %}
 
                 <div style="text-align: center; margin-top: 30px;">
-                    <button type="submit" style="
-                        background-color: var(--ink-primary); 
-                        color: #fff; 
-                        font-family: var(--font-heading); 
-                        font-weight: bold; 
-                        text-transform: uppercase; 
-                        padding: 15px 40px; 
-                        border: none; 
-                        cursor: pointer; 
-                        font-size: 1rem;
-                        transition: 0.3s;">
-                        Enviar Mensaje
+                    <button type="submit" class="btn-read" style="cursor: pointer; border: none; width: 100%; font-size: 1.2rem;">
+                        ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
             </form>

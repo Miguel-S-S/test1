@@ -8,9 +8,10 @@ class CategoriaAdmin(admin.ModelAdmin):
 
 @admin.register(MensajeContacto)
 class MensajeContactoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'email', 'fecha_envio', 'mensaje')
-    search_fields = ('nombre', 'email', 'mensaje')
+    list_display = ('nombre', 'telefono', 'fecha_envio', 'mensaje')
+    search_fields = ('nombre', 'telefono', 'mensaje')
     list_filter = ('fecha_envio','leido')
+    readonly_fields = ('fecha_envio',)
 
 @admin.register(Autor)
 class AutorAdmin(admin.ModelAdmin):

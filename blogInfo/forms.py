@@ -24,9 +24,16 @@ class ComentarioForm(forms.ModelForm):
 class ContactoForm(forms.ModelForm):
     class Meta:
         model = MensajeContacto
-        fields = ['nombre', 'email', 'mensaje']
+        fields = ['nombre', 'telefono', 'mensaje']
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Tu nombre', 'style': 'width: 100%; padding: 10px; margin-bottom: 10px;'}),
-            'email': forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'Tu email', 'style': 'width: 100%; padding: 10px; margin-bottom: 10px;'}),
+            #'email': forms.EmailInput(attrs={'class': 'form-input', 'placeholder': 'Tu email', 'style': 'width: 100%; padding: 10px; margin-bottom: 10px;'}),
+            'telefono': forms.TextInput(attrs={
+                'class': 'form-input', 
+                'placeholder': 'Ej: 3794737067 (Sin 0 ni 15)', 
+                'type': 'tel',  # Esto activa el teclado numérico en celulares
+                'pattern': '[0-9]*', # Ayuda a validación móvil
+                'style': 'width: 100%; padding: 10px; margin-bottom: 10px;'
+            }),
             'mensaje': forms.Textarea(attrs={'class': 'form-input', 'placeholder': 'Escribe tu mensaje...', 'rows': 5, 'style': 'width: 100%; padding: 10px;'}),
         }

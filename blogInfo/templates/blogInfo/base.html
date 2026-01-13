@@ -30,6 +30,19 @@
             <a href="{% url 'about' %}" class="nav-link">El Local</a> <a href="{% url 'contact' %}" class="nav-link">Pedidos</a> </div>
 
         <div class="nav-user" style="font-size: 0.9rem;">
+            {% if user.is_staff %}
+                <a href="{% url 'dashboard' %}" style="
+                    background-color: var(--accent-color); 
+                    color: white; 
+                    padding: 5px 15px; 
+                    border-radius: 20px; 
+                    text-decoration: none; 
+                    margin-right: 10px; 
+                    font-weight: bold; 
+                    font-size: 0.8rem;">
+                    <i class="fas fa-cog"></i> PANEL DUEÑO
+                </a>
+            {% endif %}
             {% if user.is_authenticated %}
                 <span style="font-family: var(--font-body); margin-right: 15px; color: var(--text-secondary);">
                     Hola, {{ user.username }}

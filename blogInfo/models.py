@@ -63,13 +63,14 @@ class Post(models.Model):
 # MODELO: MENSAJES DE CONTACTO (Req. 5)
 class MensajeContacto(models.Model):
     nombre = models.CharField(max_length=100)
-    email = models.EmailField()
+    #email = models.EmailField()
+    telefono = models.CharField(max_length=15, verbose_name="Teléfono")
     mensaje = models.TextField()
     fecha_envio = models.DateTimeField(auto_now_add=True)
     leido = models.BooleanField(default=False) # 
 
     def __str__(self):
-        return f"Mensaje de {self.nombre} - {self.email}"
+        return f"Mensaje de {self.nombre} - {self.telefono}"
 
 
 # MODELO: NOTIFICACIONES (Req. 1, 3 y 4)
