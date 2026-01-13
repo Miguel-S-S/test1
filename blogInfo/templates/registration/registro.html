@@ -10,8 +10,18 @@
         
         {% for field in form %}
             <div style="margin-bottom: 20px; text-align: left;">
-                <label style="font-family: var(--font-heading); font-weight: bold; display: block;">{{ field.label }}</label>
+                <label style="font-family: var(--font-heading); font-weight: bold; display: block;">
+                    {{ field.label }}
+                </label>
+                
                 {{ field }}
+
+                {% if field.name == "password" or field.name == "password1" %}
+                    <small style="color: var(--ink-muted); font-family: var(--font-body);">
+                        La contraseña debe tener al menos 6 caracteres.
+                    </small>
+                {% endif %}
+
                 <style>
                     input[type="text"], input[type="password"] {
                         width: 100%;
