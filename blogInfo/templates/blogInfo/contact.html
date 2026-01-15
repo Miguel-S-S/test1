@@ -13,7 +13,7 @@
         <div style="border: 2px dashed var(--border-color); padding: 20px; width: 200px; border-radius: 10px; background-color: #fffcf5;">
             <i class="fas fa-motorcycle" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 10px;"></i>
             <h4 style="margin: 5px 0; font-family: var(--font-body);">DELIVERY</h4>
-            <span style="font-weight: bold; font-size: 1.2rem;">3794 737067</span>
+            <span style="font-weight: bold; font-size: 1.2rem;">3794 095682</span>
         </div>
 
     </div>
@@ -39,9 +39,19 @@
                         <label style="font-family: var(--font-body); font-weight: bold; display: block; margin-bottom: 5px; color: var(--text-primary);">
                             {{ field.label }}
                         </label>
+
                         {{ field }}
+
+                        {% if field.errors %}
+                            <div style="color: #d32f2f; font-size: 0.9rem; margin-top: 5px;">
+                                {% for error in field.errors %}
+                                    {{ error }}<br>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                     </div>
                 {% endfor %}
+
 
                 <div style="text-align: center; margin-top: 30px;">
                     <button type="submit" class="btn-read" style="cursor: pointer; border: none; width: 100%; font-size: 1.2rem;">

@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import RegexValidator
 from django.utils import timezone
 from django.contrib.auth.models import User
 
@@ -60,11 +61,19 @@ class Post(models.Model):
         self.fecha_publicacion = timezone.now()
         self.save()
 
+validador_telefono_corrientes = RegexValidator(
+    regex=r'^37\d{8}$',
+    message='El teléfono debe tener formato 37XXXXXXXX (10 dígitos, Corrientes). Ej: 3794095682'
+)
 # MODELO: MENSAJES DE CONTACTO (Req. 5)
 class MensajeContacto(models.Model):
     nombre = models.CharField(max_length=100)
     #email = models.EmailField()
-    telefono = models.CharField(max_length=15, verbose_name="Teléfono")
+    telefono = models.CharField(
+        max_length=10,
+        verbose_name="Teléfono",
+        validators=[validador_telefono_corrientes]
+    )
     mensaje = models.TextField()
     fecha_envio = models.DateTimeField(auto_now_add=True)
     leido = models.BooleanField(default=False) # 
