@@ -1,66 +1,57 @@
-{% extends 'blogInfo/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div style="max-width: 700px; margin: 0 auto; text-align: center;">
+<div style="max-width: 600px; margin: 0 auto; text-align: center;">
     
-    <h1 class="main-title" style="font-size: 3rem; border: none;">Realizar Pedido</h1>
-    <p style="font-family: var(--font-body); margin-bottom: 30px; color: var(--text-secondary);">
-        ¿Querés probar uno de nuestros sándwiches? ¿Tenés una consulta? Escribinos y te preparamos todo.
+    <h1 class="main-title" style="border-bottom: none; margin-bottom: 10px;">Contáctanos</h1>
+    <p style="font-style: italic; margin-bottom: 40px;">
+        ¿Tienes alguna sugerencia o quieres colaborar con nosotros? Escríbenos.
     </p>
 
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
-        
-        <div style="border: 2px dashed var(--border-color); padding: 20px; width: 200px; border-radius: 10px; background-color: #fffcf5;">
-            <i class="fas fa-motorcycle" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 10px;"></i>
-            <h4 style="margin: 5px 0; font-family: var(--font-body);">DELIVERY</h4>
-            <span style="font-weight: bold; font-size: 1.2rem;">3794 095682</span>
-        </div>
-
-    </div>
-
     {% if exito %}
-        <div style="padding: 30px; background-color: #e8f5e9; border: 1px solid #4caf50; border-radius: 10px;">
-            <i class="fas fa-check-circle" style="font-size: 3rem; color: #4caf50; margin-bottom: 20px;"></i>
-            <h3 style="margin: 0; font-family: var(--font-body);">¡Pedido Enviado!</h3>
-            <p>Ya recibimos tu mensaje. En breve te contactamos para confirmar el numero que nos dejaste.</p>
-            <a href="{% url 'home' %}" class="btn-read" style="margin-top: 15px;">
-                &larr; Volver al Menú
-            </a>
+        <div style="padding: 20px; border: 2px solid var(--ink-primary); background-color: rgba(0,0,0,0.05); margin-bottom: 30px;">
+            <h3 style="margin: 0; font-family: var(--font-heading);">¡Mensaje Enviado!</h3>
+            <p>Gracias por ponerte en contacto. Te responderemos en breve...</p>
+            <a href="{% url 'home' %}" class="btn-read" style="font-size: 0.8rem; margin-top: 15px;">Volver al Inicio</a>
         </div>
     
     {% else %}
-        <div style="text-align: left; padding: 30px; background-color: #fff; border: 1px solid var(--border-color); border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
-
+        <div style="text-align: left; padding: 30px; border: 2px dashed var(--ink-muted);">
             <form method="post">
                 {% csrf_token %}
                 
                 {% for field in form %}
                     <div style="margin-bottom: 20px;">
-                        <label style="font-family: var(--font-body); font-weight: bold; display: block; margin-bottom: 5px; color: var(--text-primary);">
+                        <label style="font-family: var(--font-heading); font-weight: bold; display: block; margin-bottom: 5px;">
                             {{ field.label }}
                         </label>
-
                         {{ field }}
-
-                        {% if field.errors %}
-                            <div style="color: #d32f2f; font-size: 0.9rem; margin-top: 5px;">
-                                {% for error in field.errors %}
-                                    {{ error }}<br>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
                     </div>
                 {% endfor %}
 
-
                 <div style="text-align: center; margin-top: 30px;">
-                    <button type="submit" class="btn-read" style="cursor: pointer; border: none; width: 100%; font-size: 1.2rem;">
+                    <button type="submit" class="btn-neon" style="width: 100%; font-size: 1.2rem; cursor: pointer;">
                         ENVIAR MENSAJE <i class="fas fa-paper-plane"></i>
                     </button>
                 </div>
             </form>
         </div>
     {% endif %}
+
+    <div style="margin-top: 60px; border-top: 1px solid var(--accent-lines); padding-top: 30px;">
+    <h4 style="font-family: var(--font-heading);">Síguenos en redes</h4>
+        <p style="font-size: 1.2rem; letter-spacing: 5px;">
+            <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+                <i class="fab fa-instagram"></i> INSTAGRAM
+            </a> | 
+            <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+                <i class="fab fa-twitter"></i> TWITTER
+            </a> | 
+            <a href="#" style="text-decoration: none; color: var(--ink-primary);">
+                <i class="fab fa-facebook"></i> FACEBOOK
+            </a>
+        </p>
+    </div>
 
 </div>
 {% endblock %}

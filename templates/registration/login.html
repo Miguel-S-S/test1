@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container" style="max-width: 450px; margin: 50px auto; text-align: center;">
+    
+    <h2 class="main-title" style="font-size: 3rem; margin-top: 0; margin-bottom: 30px;">Identificarse</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div style="margin-bottom: 25px; text-align: left;">
+                <label style="
+                    font-family: var(--font-tech); 
+                    color: var(--neon-blue); 
+                    font-weight: bold; 
+                    display: block; 
+                    margin-bottom: 8px;
+                    text-transform: uppercase;
+                    text-shadow: 0 0 5px var(--neon-blue);">
+                    {{ field.label }}
+                </label>
+                
+                {{ field }}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn-neon" style="width: 100%; margin-top: 20px; font-size: 1.2rem;">
+            INGRESAR
+        </button>
+    </form>
+    
+    <div style="margin-top: 30px; font-family: var(--font-tech); color: #fff;">
+        ¿No tienes cuenta? 
+        <a href="{% url 'registro' %}" style="color: var(--neon-pink); font-weight: bold; text-decoration: none; text-shadow: 0 0 5px var(--neon-pink);">
+            Regístrate aquí
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% extends 'blogInfo/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
     
@@ -10,22 +10,40 @@
             <br><br>
         </div>
     {% endif %}
-    <div style="margin-bottom: 30px; padding: 15px; border-top: 1px solid var(--accent-lines); border-bottom: 1px solid var(--accent-lines); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-        
-        <span style="font-family: var(--font-heading); font-weight: bold; font-size: 0.9rem; text-transform: uppercase;">
-            Ordenar noticias por:
+   <div style="
+        margin-bottom: 30px; 
+        padding: 15px; 
+        border: 1px solid var(--neon-blue); 
+        background-color: rgba(0, 0, 0, 0.6); 
+        border-radius: 10px; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;">
+
+        <span style="font-family: var(--font-tech); color: var(--neon-blue); font-weight: bold; text-shadow: 0 0 5px var(--neon-blue);">
+            <i class="fas fa-filter"></i> ORDENAR MENÚ:
         </span>
 
-        <div class="filters">
-            <form method="get" style="display: inline;">
-                <select name="orden" onchange="this.form.submit()" style="padding: 5px; border: 1px solid var(--ink-secondary); background: transparent; font-family: var(--font-body); cursor: pointer;">
-                    <option value="antiguedad_desc" {% if request.GET.orden == 'antiguedad_desc' %}selected{% endif %}>Más Recientes</option>
-                    <option value="antiguedad_asc" {% if request.GET.orden == 'antiguedad_asc' %}selected{% endif %}>Más Antiguas</option>
-                    <option value="alfabetico_asc" {% if request.GET.orden == 'alfabetico_asc' %}selected{% endif %}>Título (A-Z)</option>
-                    <option value="alfabetico_desc" {% if request.GET.orden == 'alfabetico_desc' %}selected{% endif %}>Título (Z-A)</option>
-                </select>
-            </form>
-        </div>
+        <form method="get" style="margin: 0;">
+            <select name="orden" onchange="this.form.submit()" style="
+                background-color: #000; 
+                color: #fff; 
+                border: 1px solid var(--neon-pink); 
+                padding: 8px 15px; 
+                font-family: var(--font-tech); 
+                border-radius: 5px; 
+                cursor: pointer; 
+                outline: none;
+                box-shadow: 0 0 5px var(--neon-pink) inset;">
+                
+                <option value="antiguedad_desc" {% if request.GET.orden == 'antiguedad_desc' %}selected{% endif %}>▼ Más Recientes</option>
+                <option value="antiguedad_asc" {% if request.GET.orden == 'antiguedad_asc' %}selected{% endif %}>▲ Más Antiguas</option>
+                <option value="alfabetico_asc" {% if request.GET.orden == 'alfabetico_asc' %}selected{% endif %}>A-Z Título</option>
+                <option value="alfabetico_desc" {% if request.GET.orden == 'alfabetico_desc' %}selected{% endif %}>Z-A Título</option>
+            </select>
+        </form>
     </div>
     {% for post in posts %}
     <div class="post-card">
@@ -44,7 +62,7 @@
             {% endif %}
 
             <span class="post-meta">
-                {{ post.fecha_publicacion|date:"d F Y" }} 🍻 Creado por {{ post.autor_post.nombre }} 🍻 
+                {{ post.fecha_publicacion|date:"d F Y" }}  Creado por {{ post.autor_post.nombre }}  
                 Categorías: 
                 {% for cat in post.categorias.all %}
                     <a href="{% url 'categoria_posts' cat.id %}" style="color: var(--ink-primary); font-weight: bold; text-decoration: none;">

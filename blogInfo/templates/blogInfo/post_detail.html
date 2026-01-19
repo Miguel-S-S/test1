@@ -1,158 +1,162 @@
-{% extends 'blogInfo/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
+
+<article class="post-card" style="border: 2px solid var(--neon-purple); box-shadow: 0 0 20px rgba(157, 0, 255, 0.2);">
     
-    <article class="post-card" style="border-bottom: none;">
-        
-        <h1 class="post-title" style="font-size: 3rem; text-align: center; margin-bottom: 10px;">{{ post.titulo }}</h1>
-        
-        {% if post.subtitulo %}
-            <h3 style="text-align: center; font-style: italic; color: var(--ink-secondary); margin-bottom: 30px;">
-                {{ post.subtitulo }}
-            </h3>
-        {% endif %}
+    <h1 class="post-title" style="font-size: 3rem; text-align: center; margin-bottom: 10px; color: var(--neon-orange); text-shadow: 0 0 10px var(--neon-orange);">
+        {{ post.titulo }}
+    </h1>
+    
+    {% if post.subtitulo %}
+        <h3 style="text-align: center; font-style: italic; color: var(--neon-blue); margin-bottom: 30px; font-family: var(--font-tech); text-shadow: 0 0 5px var(--neon-blue);">
+            {{ post.subtitulo }}
+        </h3>
+    {% endif %}
 
-        <div class="post-meta" style="text-align: center; margin-bottom: 40px; border-bottom: 1px solid var(--accent-lines); padding-bottom: 20px;">
-            Por <strong>{{ post.autor_post.nombre }}</strong> | {{ post.fecha_publicacion|date:"d F Y" }}
-            | Categorías: 
-            {% for cat in post.categorias.all %}
-                <a href="{% url 'categoria_posts' cat.id %}" style="color: var(--ink-primary); font-weight: bold; text-decoration: none;">
-                    {{ cat.nombre }}
-                </a>{% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </div>
+    <div class="post-meta" style="text-align: center; margin-bottom: 40px; border-bottom: 1px dashed var(--neon-blue); padding-bottom: 20px; color: #ccc;">
+        Por <strong style="color: #fff;">{{ post.autor_post.nombre }}</strong> | {{ post.fecha_publicacion|date:"d F Y" }}
+        | Categorías: 
+        {% for cat in post.categorias.all %}
+            <a href="{% url 'categoria_posts' cat.id %}" style="color: var(--neon-pink); font-weight: bold; text-decoration: none; text-shadow: 0 0 5px var(--neon-pink);">
+                {{ cat.nombre }}
+            </a>{% if not forloop.last %}, {% endif %}
+        {% endfor %}
+    </div>
 
-        {% if post.imagen %}
-            <img src="{{ post.imagen.url }}" class="post-image" style="height: auto; max-height: 600px;" alt="{{ post.titulo }}">
-        {% endif %}
-        <div style="margin: 40px 0; padding: 15px; border-top: 1px solid var(--accent-lines); border-bottom: 1px solid var(--accent-lines); display: flex; justify-content: space-between; align-items: center;">
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" class="post-image" style="height: auto; max-height: 600px; border-color: var(--neon-orange);" alt="{{ post.titulo }}">
+    {% endif %}
+
+    <div style="margin: 40px 0; padding: 15px; border-top: 1px solid var(--neon-blue); border-bottom: 1px solid var(--neon-blue); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.3);">
+        
+        <div style="display: flex; gap: 20px; align-items: center;">
             
-            <div style="display: flex; gap: 20px; align-items: center;">
-                
-                <span style="color: var(--ink-muted); font-weight: bold;">
-                    <i class="fas fa-eye"></i> {{ post.vistas }} Vistas
-                </span>
+            <span style="color: var(--neon-blue); font-weight: bold; text-shadow: 0 0 5px var(--neon-blue);">
+                <i class="fas fa-eye"></i> {{ post.vistas }} Vistas
+            </span>
 
-                <form action="{% url 'dar_like' post.pk %}" method="POST" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit" style="background: none; border: none; cursor: pointer; font-size: 1.2rem;">
-                        {% if esta_likeado %}
-                            <i class="fas fa-heart" style="color: #e0245e;"></i> 
-                        {% else %}
-                            <i class="far fa-heart" style="color: var(--ink-primary);"></i>
-                        {% endif %}
-                        <span style="font-family: var(--font-body); font-weight: bold; color: var(--ink-primary);">
-                            {{ post.total_likes }} Likes
-                        </span>
-                    </button>
-                </form>
-            </div>
-
-            <div style="font-size: 0.9rem;">
-                <span style="margin-right: 10px; font-weight: bold;">Compartir:</span>
-                
-                <a href="https://api.whatsapp.com/send?text=¡Mira esta sitio sobre los mejores sandwichs en corrientes! {{ request.build_absolute_uri }}" target="_blank" style="color: #25D366; text-decoration: none; margin-right: 10px; font-size: 1.2rem;">
-                    <i class="fab fa-whatsapp"></i>
-                </a>
-
-                <a href="https://twitter.com/intent/tweet?text=Leyendo {{ post.titulo }}&url={{ request.build_absolute_uri }}" target="_blank" style="color: #1DA1F2; text-decoration: none; font-size: 1.2rem;">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
-        </div>
-        <div class="post-content" style="font-size: 1.2rem; text-align: justify;">
-            {{ post.contenido|linebreaks }}
+            <form action="{% url 'dar_like' post.pk %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" style="background: none; border: none; cursor: pointer; font-size: 1.2rem;">
+                    {% if esta_likeado %}
+                        <i class="fas fa-heart" style="color: #ff0055; text-shadow: 0 0 10px #ff0055;"></i> 
+                    {% else %}
+                        <i class="far fa-heart" style="color: var(--neon-pink);"></i>
+                    {% endif %}
+                    <span style="font-family: var(--font-tech); font-weight: bold; color: #fff;">
+                        {{ post.total_likes }} Likes
+                    </span>
+                </button>
+            </form>
         </div>
 
-
-        <div style="margin-top: 50px; text-align: center;">
-            <a href="{% url 'home' %}" class="btn-read" style="font-size: 0.9rem;">&larr; Volver al pagina principal</a>
-        </div>
-
-    </article>
-
-
-    <section style="max-width: 800px; margin: 0 auto 60px auto; padding-top: 40px; border-top: 4px double var(--ink-secondary);">
-        
-        <h3 class="main-title" style="font-size: 1.8rem; margin-top: 0; border-bottom: none;">Comentarios de los usuarios</h3>
-
-        {% if user.is_authenticated %}
-            <div style="background-color: rgba(0,0,0,0.05); padding: 20px; border-radius: 4px; margin-bottom: 40px;">
-                <h4 style="margin-top: 0; font-family: var(--font-heading);">Deja tu opinión, {{ user.username }}:</h4>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="btn-read" style="font-size: 0.8rem; cursor: pointer; border: none; margin-top: 10px;">
-                        Publicar Comentario
-                    </button>
-                </form>
-            </div>
-        {% else %}
-            <div style="text-align: center; margin-bottom: 40px; padding: 20px; border: 1px dashed var(--ink-muted);">
-                <p style="font-style: italic;">Debes ser miembro para opinar.</p>
-                <a href="{% url 'login' %}" class="btn-read" style="font-size: 0.8rem;">Iniciar Sesión</a>
-            </div>
-        {% endif %}
-
-        <div class="comments-list">
-    {% for comentario in comentarios %}
-        
-        <div style="margin-bottom: 20px; padding: 15px; border: 1px solid var(--accent-lines); background-color: rgba(255,255,255,0.4);">
+        <div style="font-size: 1.2rem;">
+            <span style="margin-right: 10px; font-weight: bold; font-size: 0.9rem; color: #ddd;">COMPARTIR:</span>
             
-            <div style="font-family: var(--font-heading); font-weight: bold; font-size: 0.9rem; color: var(--ink-primary); margin-bottom: 5px;">
-                {{ comentario.usuario.username }} 
-                <span style="font-weight: normal; color: var(--ink-muted); font-size: 0.8rem;">
-                    - {{ comentario.fecha_creacion|date:"d M, H:i" }}
-                </span>
-            </div>
-            
-            <p style="margin: 5px 0 10px 0; font-size: 1rem; color: var(--ink-secondary);">
-                {{ comentario.contenido_comentario }}
-            </p>
+            <a href="https://api.whatsapp.com/send?text=Mira este sándwich: {{ request.build_absolute_uri }}" target="_blank" style="color: #25D366; margin-right: 15px; text-shadow: 0 0 5px #25D366;">
+                <i class="fab fa-whatsapp"></i>
+            </a>
 
-            <div style="font-size: 0.8rem; border-top: 1px dotted var(--accent-lines); padding-top: 5px;">
-                {% if user.is_authenticated %}
-                    <a href="{% url 'responder_comentario' comentario.pk %}" style="color: var(--ink-primary); font-weight: bold; margin-right: 15px; text-decoration: none;">
-                        💬 Responder
-                    </a>
-                {% endif %}
-
-                {% if user.is_authenticated and comentario.usuario == request.user or user.is_staff %}
-                    <a href="{% url 'editar_comentario' comentario.pk %}" style="color: var(--ink-muted); text-decoration: none; margin-right: 10px;">[Editar]</a>
-                    <a href="{% url 'borrar_comentario' comentario.pk %}" onclick="return confirm('¿Borrar?');" style="color: #b94a48; text-decoration: none;">[Borrar]</a>
-                {% endif %}
-            </div>
-
+            <a href="https://twitter.com/intent/tweet?text={{ post.titulo }}&url={{ request.build_absolute_uri }}" target="_blank" style="color: #1DA1F2; text-shadow: 0 0 5px #1DA1F2;">
+                <i class="fab fa-twitter"></i>
+            </a>
         </div>
+    </div>
 
-        {% for respuesta in comentario.respuestas.all %}
-            <div style="margin-left: 50px; margin-bottom: 15px; padding: 10px; border-left: 3px solid var(--ink-muted); background-color: rgba(0,0,0,0.03);">
+    <div class="post-content" style="font-size: 1.2rem; text-align: justify; color: #eee; line-height: 1.8;">
+        {{ post.contenido|linebreaks }}
+    </div>
+
+    <div style="margin-top: 50px; text-align: center;">
+        <a href="{% url 'home' %}" class="btn-neon" style="font-size: 0.9rem;">&larr; VOLVER AL MENÚ</a>
+    </div>
+
+</article>
+
+
+<section style="max-width: 800px; margin: 0 auto 60px auto; padding-top: 40px; border-top: 2px solid var(--neon-purple); box-shadow: 0 -10px 20px -10px rgba(157, 0, 255, 0.3);">
+    
+    <h3 class="main-title" style="font-size: 2rem; margin-top: 0; border-bottom: none; text-shadow: 0 0 10px var(--neon-purple);">
+        Opiniones
+    </h3>
+
+    {% if user.is_authenticated %}
+        <div class="form-container" style="padding: 30px; border: 1px dashed var(--neon-blue); margin-bottom: 40px;">
+            <h4 style="margin-top: 0; font-family: var(--font-tech); color: var(--neon-blue);">
+                Deja tu opinión, {{ user.username }}:
+            </h4>
+            <form method="post">
+                {% csrf_token %}
                 
-                <div style="font-size: 0.85rem; font-weight: bold; color: var(--ink-secondary);">
-                    {{ respuesta.usuario.username }} 
-                    <span style="font-weight: normal; color: var(--ink-muted);">respondió:</span>
+                <div style="margin-bottom: 15px;">
+                    {{ form.contenido_comentario }} 
+                    </div>
+
+                <button type="submit" class="btn-neon" style="margin-top: 10px; width: 100%;">
+                    PUBLICAR COMENTARIO <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    {% else %}
+        <div style="text-align: center; margin-bottom: 40px; padding: 20px; border: 1px dashed var(--neon-pink); border-radius: 10px;">
+            <p style="font-style: italic; color: #ddd;">Debes ser miembro para opinar.</p>
+            <a href="{% url 'login' %}" class="btn-neon" style="font-size: 0.8rem;">INICIAR SESIÓN</a>
+        </div>
+    {% endif %}
+
+    <div class="comments-list">
+        {% for comentario in comentarios %}
+            
+            <div style="margin-bottom: 20px; padding: 20px; border: 1px solid var(--neon-blue); background-color: rgba(0,0,0,0.6); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 243, 255, 0.1);">
+                
+                <div style="font-family: var(--font-tech); font-weight: bold; font-size: 1rem; color: var(--neon-orange); margin-bottom: 10px; display: flex; justify-content: space-between;">
+                    <span><i class="fas fa-user-circle"></i> {{ comentario.usuario.username }}</span>
+                    <span style="font-weight: normal; color: #888; font-size: 0.8rem;">
+                        {{ comentario.fecha_creacion|date:"d M, H:i" }}
+                    </span>
                 </div>
-
-                <p style="margin: 5px 0; font-size: 0.95rem;">
-                    {{ respuesta.contenido_comentario }}
+                
+                <p style="margin: 5px 0 15px 0; font-size: 1rem; color: #fff;">
+                    {{ comentario.contenido_comentario }}
                 </p>
 
-                {% if user.is_authenticated and respuesta.usuario == request.user or user.is_staff %}
-                    <div style="font-size: 0.75rem; margin-top: 5px;">
-                        <a href="{% url 'editar_comentario' respuesta.pk %}" style="color: var(--ink-muted);">[Editar]</a>
-                        <a href="{% url 'borrar_comentario' respuesta.pk %}" onclick="return confirm('¿Borrar?');" style="color: #b94a48; margin-left: 5px;">[Borrar]</a>
-                    </div>
-                {% endif %}
+                <div style="font-size: 0.8rem; border-top: 1px dashed #444; padding-top: 10px;">
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'responder_comentario' comentario.pk %}" style="color: var(--neon-blue); font-weight: bold; margin-right: 15px; text-decoration: none;">
+                            💬 Responder
+                        </a>
+                    {% endif %}
+
+                    {% if user.is_authenticated and comentario.usuario == request.user or user.is_staff %}
+                        <a href="{% url 'editar_comentario' comentario.pk %}" style="color: #aaa; text-decoration: none; margin-right: 10px;">[Editar]</a>
+                        <a href="{% url 'borrar_comentario' comentario.pk %}" onclick="return confirm('¿Borrar?');" style="color: #ff4444; text-decoration: none;">[Borrar]</a>
+                    {% endif %}
+                </div>
+
             </div>
+
+            {% for respuesta in comentario.respuestas.all %}
+                <div style="margin-left: 50px; margin-bottom: 15px; padding: 15px; border-left: 3px solid var(--neon-pink); background-color: rgba(255, 0, 255, 0.05);">
+                    
+                    <div style="font-size: 0.9rem; font-weight: bold; color: var(--neon-pink);">
+                        {{ respuesta.usuario.username }} 
+                        <span style="font-weight: normal; color: #888;">respondió:</span>
+                    </div>
+
+                    <p style="margin: 5px 0; font-size: 0.95rem; color: #ddd;">
+                        {{ respuesta.contenido_comentario }}
+                    </p>
+                </div>
+            {% endfor %}
+
+        {% empty %}
+            <p style="text-align: center; font-style: italic; color: #888;">
+                Sé el primero en comentar.
+            </p>
         {% endfor %}
+    </div>
 
-    {% empty %}
-        <p style="text-align: center; font-style: italic; color: var(--ink-muted);">
-            Sé el primero en comentar 🍺.
-        </p>
-    {% endfor %}
-</div>
-
-    </section>
+</section>
 
 {% endblock %}

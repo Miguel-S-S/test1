@@ -1,0 +1,262 @@
+/* =========================================
+   ESTILO RETRO-NEÓN / SYNTHWAVE (RESPONSIVE)
+   ========================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Orbitron:wght@400;700&display=swap');
+
+:root {
+    --bg-dark: #0a0a12;
+    --neon-pink: #ff00ff;
+    --neon-purple: #9d00ff;
+    --neon-orange: #ff9900;
+    --neon-blue: #00f3ff;
+    --font-neon-script: 'Pacifico', cursive;
+    --font-tech: 'Orbitron', sans-serif;
+}
+
+/* === RESET GLOBAL PARA EVITAR SCROLL HORIZONTAL === */
+* {
+    box-sizing: border-box; /* Esto evita que el padding agrande los elementos */
+    max-width: 100%; /* Nada puede ser más ancho que la pantalla */
+}
+
+body {
+    background-color: var(--bg-dark);
+    background-image: 
+        linear-gradient(rgba(157, 0, 255, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(157, 0, 255, 0.2) 1px, transparent 1px);
+    background-size: 40px 40px;
+    color: #fff;
+    font-family: var(--font-tech);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden; /* Oculta desbordamientos laterales */
+}
+
+/* Contenedor Principal */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    width: 95%; /* Ocupa casi todo el ancho en móviles */
+    flex: 1;
+}
+
+/* Título Principal */
+h1.main-title {
+    font-family: var(--font-neon-script);
+    font-size: 4.5rem;
+    text-align: center;
+    margin: 30px 0 10px 0;
+    color: #fff;
+    line-height: 1.2;
+    text-shadow: 
+        0 0 5px #fff,
+        0 0 20px var(--neon-pink),
+        0 0 40px var(--neon-purple);
+    animation: flicker 2s infinite alternate;
+}
+
+/* Subtítulo */
+.brand-subtitle {
+    text-align: center;
+    font-family: var(--font-tech);
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    font-size: 1.5rem;
+    color: var(--neon-orange);
+    margin-bottom: 40px;
+    text-shadow: 0 0 10px var(--neon-orange);
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 1; }
+    20%, 24%, 55% { opacity: 0.8; }
+}
+
+/* Navegación */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-top: 2px solid var(--neon-purple);
+    border-bottom: 2px solid var(--neon-purple);
+    background: rgba(0, 0, 0, 0.5);
+    margin-bottom: 40px;
+    flex-wrap: wrap; /* Permite que los elementos bajen si no entran */
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--neon-blue);
+    font-family: var(--font-tech);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 10px;
+    transition: all 0.3s;
+    display: inline-block;
+}
+
+.nav-link:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--neon-blue);
+}
+
+/* Botones Neón */
+.btn-neon {
+    background: transparent;
+    border: 2px solid var(--neon-pink);
+    color: var(--neon-pink);
+    padding: 10px 20px;
+    font-family: var(--font-tech);
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px var(--neon-pink) inset;
+    text-shadow: 0 0 5px var(--neon-pink);
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-neon:hover {
+    background: var(--neon-pink);
+    color: #fff;
+    box-shadow: 0 0 20px var(--neon-pink);
+}
+
+/* Tarjetas y Formularios */
+.post-card, .form-container {
+    background: rgba(10, 10, 18, 0.8);
+    border: 2px solid var(--neon-purple);
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 0 20px rgba(157, 0, 255, 0.3);
+    border-radius: 10px;
+    overflow: hidden; /* Evita que imágenes grandes rompan la tarjeta */
+}
+
+.post-image {
+    width: 100%;
+    height: auto; /* Altura automática para no estirar */
+    max-height: 400px;
+    object-fit: cover;
+    border: 2px solid var(--neon-orange);
+    box-shadow: 0 0 15px var(--neon-orange);
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+input, textarea, select {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--neon-blue);
+    color: #fff;
+    padding: 15px;
+    font-family: var(--font-tech);
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--neon-pink);
+    outline: none;
+    box-shadow: 0 0 10px var(--neon-pink);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    border-top: 2px solid var(--neon-purple);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* =======================================================
+   SECCIÓN MÓVIL (Aquí ocurre la magia para celulares)
+   ======================================================= */
+@media (max-width: 768px) {
+    
+    /* 1. Ajuste de Texto Gigante */
+    h1.main-title {
+        font-size: 3rem !important; /* Forzamos tamaño más chico */
+        margin-top: 15px;
+    }
+    
+    .brand-subtitle span {
+        font-size: 1.2rem !important;
+        letter-spacing: 2px;
+    }
+
+    /* 2. Menú de Navegación Vertical */
+    nav {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .nav-main {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .nav-user {
+        border-top: 1px dashed var(--neon-purple);
+        padding-top: 15px;
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-link {
+        display: block;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 5px;
+    }
+
+    /* 3. Ajuste de Contenedores y Formularios */
+    .container, .form-container {
+        padding: 15px !important;
+        width: 95% !important;
+        margin: 10px auto !important;
+    }
+
+    /* 4. Dashboard (Tarjetas una debajo de otra) */
+    /* Buscamos los divs que tienen flex y los forzamos a columna */
+    div[style*="display: flex"] {
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    /* Excepción: Los iconos pequeños de likes/vistas sí pueden ir en fila */
+    .post-meta div[style*="display: flex"], 
+    div[style*="justify-content: space-between"] {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    /* 5. Imágenes y Botones */
+    .post-image {
+        height: 200px; /* Más chicas en celular */
+    }
+
+    button, .btn-neon {
+        width: 100% !important; /* Botones ocupan todo el ancho para tocar fácil */
+        margin-bottom: 10px;
+    }
+}

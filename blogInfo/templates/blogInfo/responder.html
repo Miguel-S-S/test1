@@ -1,22 +1,38 @@
-{% extends 'blogInfo/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div style="max-width: 600px; margin: 50px auto;">
-    <h3 class="main-title" style="border-bottom: none; font-size: 1.5rem;">Respondiendo a {{ comentario_padre.usuario.username }}</h3>
+<div class="form-container" style="max-width: 600px; margin: 50px auto; padding: 30px;">
     
-    <div style="background: #e1d8c1; padding: 15px; border-left: 4px solid var(--ink-primary); margin-bottom: 20px; font-style: italic;">
+    <h3 class="main-title" style="border-bottom: none; font-size: 2rem; margin-top: 0; color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue);">
+        Respondiendo a {{ comentario_padre.usuario.username }}
+    </h3>
+    
+    <div style="
+        background: rgba(255, 255, 255, 0.05); 
+        padding: 20px; 
+        border-left: 4px solid var(--neon-pink); 
+        margin-bottom: 30px; 
+        font-style: italic; 
+        color: #ddd;
+        font-family: var(--font-tech);">
         "{{ comentario_padre.contenido_comentario }}"
     </div>
 
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
         
-        <div style="margin-top: 20px;">
-            <button type="submit" class="btn-read" style="cursor: pointer; border: none; font-size: 0.9rem;">
-                Publicar Respuesta
+        <div style="margin-bottom: 20px; color: #fff;">
+            {{ form.as_p }}
+        </div>
+        
+        <div style="margin-top: 30px; display: flex; align-items: center; gap: 20px;">
+            <button type="submit" class="btn-neon" style="cursor: pointer; border: none; font-size: 1rem;">
+                PUBLICAR RESPUESTA
             </button>
-            <a href="{% url 'post_detail' comentario_padre.post.pk %}" style="margin-left: 15px; color: var(--ink-muted); text-decoration: none;">Cancelar</a>
+            
+            <a href="{% url 'post_detail' comentario_padre.post.pk %}" style="color: var(--neon-orange); text-decoration: none; font-weight: bold; text-shadow: 0 0 5px var(--neon-orange);">
+                Cancelar
+            </a>
         </div>
     </form>
 </div>

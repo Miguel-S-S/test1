@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container" style="max-width: 500px; margin: 40px auto; text-align: center;">
+    
+    <h2 class="main-title" style="font-size: 3rem; margin-top: 0; margin-bottom: 30px;">
+        Crear Cuenta
+    </h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form %}
+            <div style="margin-bottom: 25px; text-align: left;">
+                
+                <label style="
+                    font-family: var(--font-tech); 
+                    font-weight: bold; 
+                    display: block; 
+                    margin-bottom: 8px; 
+                    color: var(--neon-blue); 
+                    text-shadow: 0 0 5px var(--neon-blue);
+                    font-size: 1.1rem;">
+                    {{ field.label }}
+                </label>
+                
+                {{ field }}
+
+                {% if field.help_text %}
+                    <small style="color: #ccc; display: block; margin-top: 8px; font-size: 0.8rem; font-family: var(--font-tech);">
+                        <i class="fas fa-info-circle" style="color: var(--neon-blue);"></i> {{ field.help_text }}
+                    </small>
+                {% endif %}
+                
+                {% for error in field.errors %}
+                    <div style="color: #ff4444; font-size: 0.9rem; margin-top: 5px; font-weight: bold; text-shadow: 0 0 5px #ff0000;">
+                        <i class="fas fa-exclamation-circle"></i> {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+        <div style="text-align: center; margin-top: 40px;">
+            <button type="submit" class="btn-neon" style="width: 100%; font-size: 1.2rem; padding: 15px;">
+                REGISTRARSE
+            </button>
+        </div>
+    </form>
+
+    <div style="text-align: center; margin-top: 30px; font-size: 0.9rem; color: #fff; font-family: var(--font-tech);">
+        ¿Ya tenés cuenta? 
+        <a href="{% url 'login' %}" style="color: var(--neon-pink); font-weight: bold; text-decoration: none; text-shadow: 0 0 5px var(--neon-pink);">
+            Ingresá acá
+        </a>
+    </div>
+</div>
+{% endblock %}

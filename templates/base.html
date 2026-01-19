@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Primavera 88</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}?v=6.0">
+</head>
+<body>
+
+    <header>
+        <h1 class="main-title">Primavera 88</h1>
+        
+        <div class="brand-subtitle">
+            <span style="color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple);">SANDWICHES</span> 
+        </div>
+        
+        <nav>
+            <div class="nav-main">
+                <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i> Inicio</a>
+                <a href="{% url 'about' %}" class="nav-link"><i class="fas fa-store"></i> El Local</a>
+                <a href="{% url 'contact' %}" class="nav-link"><i class="fas fa-motorcycle"></i> Pedidos</a>
+            </div>
+
+            <div class="nav-user">
+                {% if user.is_authenticated %}
+                    <span style="color: var(--neon-blue); margin-right: 15px; font-family: var(--font-tech); text-shadow: 0 0 5px var(--neon-blue);">
+                        Hola, {{ user.username }}
+                    </span>
+                    
+                    {% if user.is_staff %}
+                        <a href="{% url 'dashboard' %}" class="btn-neon" style="margin-right: 10px;">
+                            <i class="fas fa-cog"></i> DUEÑO
+                        </a>
+                    {% endif %}
+
+                    <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-neon">
+                            Salir
+                        </button>
+                    </form>
+
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-link">Ingresar</a>
+                    <a href="{% url 'registro' %}" class="btn-neon">Registrarse</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% include 'partials/footer.html' %}
+
+</body>
+</html>
