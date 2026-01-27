@@ -13,10 +13,52 @@
 <body>
 
     <header>
-        <h1 class="main-title">Primavera 88</h1>
+        <div class="title-loader-wrapper">
+
+            <div class="loader small loader-top">
+                <div class="dot" style="--i:0"></div>
+                <div class="dot" style="--i:1"></div>
+                <div class="dot" style="--i:2"></div>
+                <div class="dot" style="--i:3"></div>
+                <div class="dot" style="--i:4"></div>
+                <div class="dot" style="--i:5"></div>
+                <div class="dot" style="--i:6"></div>
+                <div class="dot" style="--i:7"></div>
+                <div class="dot" style="--i:8"></div>
+                <div class="dot" style="--i:9"></div>
+                <div class="dot" style="--i:10"></div>
+                <div class="dot" style="--i:11"></div>
+                <div class="dot" style="--i:12"></div>
+                <div class="dot" style="--i:13"></div>
+                <div class="dot" style="--i:14"></div>
+                <div class="dot" style="--i:15"></div>                
+            </div>
+            <h1 class="main-title">Primavera 88</h1>
+            <div class="loader small loader-bottom reverse">
+                <div class="dot" style="--i:0"></div>
+                <div class="dot" style="--i:1"></div>
+                <div class="dot" style="--i:2"></div>
+                <div class="dot" style="--i:3"></div>
+                <div class="dot" style="--i:4"></div>
+                <div class="dot" style="--i:5"></div>
+                <div class="dot" style="--i:6"></div>
+                <div class="dot" style="--i:7"></div>
+                <div class="dot" style="--i:8"></div>
+                <div class="dot" style="--i:9"></div>
+                <div class="dot" style="--i:10"></div>
+                <div class="dot" style="--i:11"></div>
+                <div class="dot" style="--i:12"></div>
+                <div class="dot" style="--i:13"></div>
+                <div class="dot" style="--i:14"></div>
+                <div class="dot" style="--i:15"></div> 
+                <div class="dot" style="--i:16"></div>
+            </div>
+
+        </div>
+
         
         <div class="brand-subtitle">
-            <span style="color: var(--neon-purple); text-shadow: 0 0 10px var(--neon-purple);">SANDWICHES</span> 
+            <span style="color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-purple);">SANDWICHES</span> 
         </div>
         
         <nav>
@@ -59,6 +101,16 @@
     </div>
 
     {% include 'partials/footer.html' %}
+    <svg width="0" height="0" aria-hidden="true">
+        <filter id="glow-0" x="-25%" y="-25%" width="150%" height="150%">
+            <feGaussianBlur stdDeviation="6" result="blur"/>
+            <feMerge>
+                <feMergeNode in="blur"/>
+                <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+        </filter>
+    </svg>
+</footer>
 
 </body>
 </html>

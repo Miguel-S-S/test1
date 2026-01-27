@@ -18,8 +18,8 @@ SECRET_KEY = 'django-insecure-5-8a@*fyow-)7j!#4@&fu0zgzdu=cxl3#h7msgu_pgtnouxxoa
 
 #BEGIN Production
 
-DEBUG = False
-ALLOWED_HOSTS = ['miguels.pythonanywhere.com']
+# DEBUG = False
+# ALLOWED_HOSTS = ['miguels.pythonanywhere.com']
 
 #END Production
 
@@ -31,8 +31,8 @@ ALLOWED_HOSTS = ['miguels.pythonanywhere.com']
 # end QA   ε=ε=ε=(~￣▽￣)~
 
 # 1. CAMBIO IMPORTANTE: Pon esto en True para trabajar en tu PC
-# DEBUG = True 
-# ALLOWED_HOSTS = []
+DEBUG = True 
+ALLOWED_HOSTS = []
 
 
 
